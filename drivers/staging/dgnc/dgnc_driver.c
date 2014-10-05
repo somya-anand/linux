@@ -78,7 +78,7 @@ static void		dgnc_do_remap(struct dgnc_board *brd);
 
 /* Driver load/unload functions */
 int		dgnc_init_module(void);
-void		dgnc_cleanup_module(void);
+void	dgnc_cleanup_module(void);
 
 module_init(dgnc_init_module);
 module_exit(dgnc_cleanup_module);
@@ -433,7 +433,7 @@ static void dgnc_cleanup_board(struct dgnc_board *brd)
 
 		DGNC_LOCK(dgnc_global_lock, flags);
 		brd->msgbuf = NULL;
-		printk("%s", brd->msgbuf_head);
+		pr_info("%s", brd->msgbuf_head);
 		kfree(brd->msgbuf_head);
 		brd->msgbuf_head = NULL;
 		DGNC_UNLOCK(dgnc_global_lock, flags);
@@ -680,7 +680,7 @@ static int dgnc_found_board(struct pci_dev *pdev, int id)
 	DPR_INIT(("dgnc_scan(%d) - printing out the msgbuf\n", i));
 	DGNC_LOCK(dgnc_global_lock, flags);
 	brd->msgbuf = NULL;
-	printk("%s", brd->msgbuf_head);
+	pr_info("%s", brd->msgbuf_head);
 	kfree(brd->msgbuf_head);
 	brd->msgbuf_head = NULL;
 	DGNC_UNLOCK(dgnc_global_lock, flags);
