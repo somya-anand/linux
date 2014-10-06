@@ -41,7 +41,7 @@
 
 #include "dgnc_driver.h"
 #include "dgnc_mgmt.h"
-
+#include <linux/errno.h>
 
 static ssize_t dgnc_driver_version_show(struct device_driver *ddp, char *buf)
 {
@@ -85,7 +85,11 @@ static ssize_t dgnc_driver_debug_show(struct device_driver *ddp, char *buf)
 
 static ssize_t dgnc_driver_debug_store(struct device_driver *ddp, const char *buf, size_t count)
 {
-	sscanf(buf, "0x%x\n", &dgnc_debug);
+	int rv;
+
+	rv = sscanf(buf, "0x%x\n", &dgnc_debug);
+	if (1 != rv)
+		return -EINVAL;
 	return count;
 }
 static DRIVER_ATTR(debug, (S_IRUSR | S_IWUSR), dgnc_driver_debug_show, dgnc_driver_debug_store);
@@ -98,7 +102,11 @@ static ssize_t dgnc_driver_rawreadok_show(struct device_driver *ddp, char *buf)
 
 static ssize_t dgnc_driver_rawreadok_store(struct device_driver *ddp, const char *buf, size_t count)
 {
-	sscanf(buf, "0x%x\n", &dgnc_rawreadok);
+	int rv;
+
+	rv = sscanf(buf, "0x%x\n", &dgnc_rawreadok);
+	if (1 != rv)
+		return -EINVAL;
 	return count;
 }
 static DRIVER_ATTR(rawreadok, (S_IRUSR | S_IWUSR), dgnc_driver_rawreadok_show, dgnc_driver_rawreadok_store);
@@ -111,7 +119,11 @@ static ssize_t dgnc_driver_pollrate_show(struct device_driver *ddp, char *buf)
 
 static ssize_t dgnc_driver_pollrate_store(struct device_driver *ddp, const char *buf, size_t count)
 {
-	sscanf(buf, "%d\n", &dgnc_poll_tick);
+	int rv;
+
+	rv = sscanf(buf, "%d\n", &dgnc_poll_tick);
+	if (1 != rv)
+		return -EINVAL;
 	return count;
 }
 static DRIVER_ATTR(pollrate, (S_IRUSR | S_IWUSR), dgnc_driver_pollrate_show, dgnc_driver_pollrate_store);
