@@ -1932,10 +1932,9 @@ static void neo_vpd(struct dgnc_board *brd)
 		brd->vpd[(i*2)+1] = (a >> 8) & 0xff;
 	}
 
-	if  (((brd->vpd[0x08] != 0x82)	   /* long resource name tag */
+	if (((brd->vpd[0x08] != 0x82)	   /* long resource name tag */
 		&&  (brd->vpd[0x10] != 0x82))   /* long resource name tag (PCI-66 files)*/
-		||  (brd->vpd[0x7F] != 0x78))   /* small resource end tag */
-	{
+		||  (brd->vpd[0x7F] != 0x78)) {  /* small resource end tag */
 		memset(brd->vpd, '\0', NEO_VPD_IMAGESIZE);
 	} else {
 		/* Search for the serial number */
