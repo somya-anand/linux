@@ -130,9 +130,8 @@ void dgnc_create_driver_sysfiles(struct pci_driver *dgnc_driver)
 	rc |= driver_create_file(driverfs, &driver_attr_pollrate);
 	rc |= driver_create_file(driverfs, &driver_attr_pollcounter);
 	rc |= driver_create_file(driverfs, &driver_attr_state);
-	if (rc) {
+	if (rc)
 		printk(KERN_ERR "DGNC: sysfs driver_create_file failed!\n");
-	}
 }
 
 
@@ -404,9 +403,8 @@ void dgnc_create_ports_sysfiles(struct dgnc_board *bd)
 	rc |= device_create_file(&(bd->pdev->dev), &dev_attr_ports_txcount);
 	rc |= device_create_file(&(bd->pdev->dev), &dev_attr_vpd);
 	rc |= device_create_file(&(bd->pdev->dev), &dev_attr_serial_number);
-	if (rc) {
+	if (rc)
 		printk(KERN_ERR "DGNC: sysfs device_create_file failed!\n");
-	}
 }
 
 
