@@ -180,7 +180,7 @@ static int BcmFileDownload(struct bcm_mini_adapter *Adapter, const char *path, u
 {
 	int errorno = 0;
 	struct file *flp = NULL;
-	struct timeval tv = {0};
+	ktime_t kt;
 
 	flp = open_firmware_file(Adapter, path);
 	if (!flp) {
@@ -188,9 +188,9 @@ static int BcmFileDownload(struct bcm_mini_adapter *Adapter, const char *path, u
 		return -ENOENT;
 	}
 	BCM_DEBUG_PRINT(Adapter, DBG_TYPE_INITEXIT, MP_INIT, DBG_LVL_ALL, "Opened file is = %s and length =0x%lx to be downloaded at =0x%x", path, (unsigned long)file_inode(flp)->i_size, loc);
-	do_gettimeofday(&tv);
+	kt = ktime_get();
 
-	BCM_DEBUG_PRINT(Adapter, DBG_TYPE_INITEXIT, MP_INIT, DBG_LVL_ALL, "download start %lx", ((tv.tv_sec * 1000) + (tv.tv_usec / 1000)));
+	BCM_DEBUG_PRINT(Adapter, DBG_TYPE_INITEXIT, MP_INIT, DBG_LVL_ALL, "download start %llu", ktime_to_ns(kt));
 	if (Adapter->bcm_file_download(Adapter->pvInterfaceAdapter, flp, loc)) {
 		BCM_DEBUG_PRINT(Adapter, DBG_TYPE_INITEXIT, MP_INIT, DBG_LVL_ALL, "Failed to download the firmware with error %x!!!", -EIO);
 		errorno = -EIO;
@@ -548,10 +548,9 @@ void LinkControlResponseMessage(struct bcm_mini_adapter *Adapter, PUCHAR pucBuff
 void SendIdleModeResponse(struct bcm_mini_adapter *Adapter)
 {
 	int status = 0, NVMAccess = 0, lowPwrAbortMsg = 0;
-	struct timeval tv;
+	ktime_t kt;
 	struct bcm_link_request stIdleResponse = {{0} };
 
-	memset(&tv, 0, sizeof(tv));
 	stIdleResponse.Leader.Status = IDLE_MESSAGE;
 	stIdleResponse.Leader.PLength = IDLE_MODE_PAYLOAD_LENGTH;
 	stIdleResponse.szData[0] = GO_TO_IDLE_MODE_PAYLOAD;
@@ -632,8 +631,8 @@ void SendIdleModeResponse(struct bcm_mini_adapter *Adapter)
 		Adapter->bPreparingForLowPowerMode = false;
 		StartInterruptUrb((struct bcm_interface_adapter *)(Adapter->pvInterfaceAdapter));
 	}
-	do_gettimeofday(&tv);
-	BCM_DEBUG_PRINT(Adapter, DBG_TYPE_RX, RX_DPC, DBG_LVL_ALL, "IdleMode Msg submitter to Q :%ld ms", tv.tv_sec * 1000 + tv.tv_usec / 1000);
+	kt = ktime_get();
+	BCM_DEBUG_PRINT(Adapter, DBG_TYPE_RX, RX_DPC, DBG_LVL_ALL, "IdleMode Msg submitter to Q :%llu ms", ktime_to_ms(kt));
 }
 
 /******************************************************************
