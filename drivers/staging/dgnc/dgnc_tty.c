@@ -49,7 +49,7 @@
 #include <linux/delay.h>	/* For udelay */
 #include <linux/uaccess.h>	/* For copy_from_user/copy_to_user */
 #include <linux/pci.h>
-
+#include <linux/ktime.h>
 #include "dgnc_driver.h"
 #include "dgnc_tty.h"
 #include "dgnc_types.h"
@@ -452,7 +452,7 @@ void dgnc_tty_uninit(struct dgnc_board *brd)
  */
 void dgnc_sniff_nowait_nolock(struct channel_t *ch, unsigned char *text, unsigned char *buf, int len)
 {
-	struct timeval tv;
+	ktime_t kt;
 	int n;
 	int r;
 	int nbuf;
@@ -471,10 +471,9 @@ void dgnc_sniff_nowait_nolock(struct channel_t *ch, unsigned char *text, unsigne
 	if (!(ch->ch_sniff_flags & SNIFF_OPEN))
 		goto exit;
 
-	do_gettimeofday(&tv);
-
+	kt = ktime_get();
 	/* Create our header for data dump */
-	p += sprintf(p, "<%ld %ld><%s><", tv.tv_sec, tv.tv_usec, text);
+	p += sprintf(p, "<%llu %llu><%s><", ktime_divns(kt, NSEC_PER_SEC), ktime_to_us(kt), text);
 	tmpbuflen = p - tmpbuf;
 
 	do {
