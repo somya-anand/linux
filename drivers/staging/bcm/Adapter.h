@@ -6,6 +6,7 @@
 
 #define MAX_FRAGMENTEDIP_CLASSIFICATION_ENTRIES 256
 #include "Debug.h"
+#include <linux/ktime.h>
 
 struct bcm_leader {
 	USHORT	Vcid;
@@ -192,7 +193,7 @@ struct bcm_packet_info {
 	bool		bHeaderSuppressionEnabled;
 	spinlock_t	SFQueueLock;
 	void		*pstSFIndication;
-	struct timeval	stLastUpdateTokenAt;
+	ktime_t 	stLastUpdateTokenAt;
 	atomic_t	uiPerSFTxResourceCount;
 	UINT		uiMaxLatency;
 	UCHAR		bIPCSSupport;
