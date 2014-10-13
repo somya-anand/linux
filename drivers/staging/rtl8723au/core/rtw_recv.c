@@ -85,7 +85,7 @@ int _rtw_init_recv_priv23a(struct recv_priv *precvpriv,
 	return res;
 }
 
-void _rtw_free_recv_priv23a (struct recv_priv *precvpriv)
+void _rtw_free_recv_priv23a(struct recv_priv *precvpriv)
 {
 	struct rtw_adapter *padapter = precvpriv->adapter;
 	struct recv_frame *precvframe;
@@ -250,7 +250,7 @@ int rtw_enqueue_recvbuf23a(struct recv_buf *precvbuf, struct rtw_queue *queue)
 	return _SUCCESS;
 }
 
-struct recv_buf *rtw_dequeue_recvbuf23a (struct rtw_queue *queue)
+struct recv_buf *rtw_dequeue_recvbuf23a(struct rtw_queue *queue)
 {
 	unsigned long irqL;
 	struct recv_buf *precvbuf;
@@ -1551,7 +1551,7 @@ exit:
 
 /* remove the wlanhdr and add the eth_hdr */
 
-static int wlanhdr_to_ethhdr (struct recv_frame *precvframe)
+static int wlanhdr_to_ethhdr(struct recv_frame *precvframe)
 {
 	u16	eth_type, len, hdrlen;
 	u8	bsnaphdr;
