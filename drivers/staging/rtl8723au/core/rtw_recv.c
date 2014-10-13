@@ -393,10 +393,10 @@ int recvframe_chkmic(struct rtw_adapter *adapter,
 							    "%02x:0x%02x:0x%0"
 							    "2x:0x%02x:0x%02x"
 							    ":0x%02x",
-							    *(precvframe->pkt->data+i),*(precvframe->pkt->data+i+1),
-							    *(precvframe->pkt->data+i+2),*(precvframe->pkt->data+i+3),
-							    *(precvframe->pkt->data+i+4),*(precvframe->pkt->data+i+5),
-							    *(precvframe->pkt->data+i+6),*(precvframe->pkt->data+i+7)));
+							    *(precvframe->pkt->data+i), *(precvframe->pkt->data+i+1),
+							    *(precvframe->pkt->data+i+2), *(precvframe->pkt->data+i+3),
+							    *(precvframe->pkt->data+i+4), *(precvframe->pkt->data+i+5),
+							    *(precvframe->pkt->data+i+6), *(precvframe->pkt->data+i+7)));
 				}
 				RT_TRACE(_module_rtl871x_recv_c_, _drv_err_,
 					 ("\n ====== demp packet end [len =%d]"
