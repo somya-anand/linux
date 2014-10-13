@@ -139,7 +139,7 @@ u8 *rtw_set_ie23a(u8 *pbuf, int index, uint len, const u8 *source, uint *frlen)
 	return pbuf + len + 2;
 }
 
-inline u8 *rtw_set_ie23a_ch_switch (u8 *buf, u32 *buf_len, u8 ch_switch_mode,
+inline u8 *rtw_set_ie23a_ch_switch(u8 *buf, u32 *buf_len, u8 ch_switch_mode,
 				u8 new_ch, u8 ch_switch_cnt)
 {
 	u8 ie_data[3];
