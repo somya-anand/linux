@@ -331,7 +331,7 @@ uint rtw_get_rateset_len23a(u8 *rateset)
 {
 	uint i = 0;
 
-	while(1) {
+	while (1) {
 		if (rateset[i] == 0)
 			break;
 
