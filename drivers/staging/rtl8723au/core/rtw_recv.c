@@ -1370,9 +1370,8 @@ static int validate_recv_data_frame(struct rtw_adapter *adapter,
 			(qos_ctrl & IEEE80211_QOS_CTL_A_MSDU_PRESENT) >> 7;
 		pattrib->hdrlen += IEEE80211_QOS_CTL_LEN;
 
-		if (pattrib->priority != 0 && pattrib->priority != 3) {
+		if (pattrib->priority != 0 && pattrib->priority != 3)
 			adapter->recvpriv.bIsAnyNonBEPkts = true;
-		}
 	} else {
 		pattrib->priority = 0;
 		pattrib->ack_policy = 0;
@@ -1748,9 +1747,8 @@ struct recv_frame *recvframe_chk_defrag23a(struct rtw_adapter *padapter,
 	} else
 		pdefrag_q = &psta->sta_recvpriv.defrag_q;
 
-	if ((ismfrag == 0) && (fragnum == 0)) {
+	if ((ismfrag == 0) && (fragnum == 0))
 		prtnframe = precv_frame;/* isn't a fragment frame */
-	}
 
 	if (ismfrag == 1) {
 		/* 0~(n-1) fragment frame */
@@ -2096,14 +2094,12 @@ int recv_indicatepkt_reorder(struct rtw_adapter *padapter,
 		  preorder_ctrl->indicate_seq, pattrib->seq_num));
 
 	/* s2. check if winstart_b(indicate_seq) needs to been updated */
-	if (!check_indicate_seq(preorder_ctrl, pattrib->seq_num)) {
+	if (!check_indicate_seq(preorder_ctrl, pattrib->seq_num))
 		goto _err_exit;
-	}
 
 	/* s3. Insert all packet into Reorder Queue to maintain its ordering. */
-	if (!enqueue_reorder_recvframe23a(preorder_ctrl, prframe)) {
+	if (!enqueue_reorder_recvframe23a(preorder_ctrl, prframe))
 		goto _err_exit;
-	}
 
 	/* s4. */
 	/*  Indication process. */
@@ -2144,9 +2140,8 @@ void rtw_reordering_ctrl_timeout_handler23a(unsigned long pcontext)
 	padapter = preorder_ctrl->padapter;
 	ppending_recvframe_queue = &preorder_ctrl->pending_recvframe_queue;
 
-	if (padapter->bDriverStopped || padapter->bSurpriseRemoved) {
+	if (padapter->bDriverStopped || padapter->bSurpriseRemoved)
 		return;
-	}
 
 	/* DBG_8723A("+rtw_reordering_ctrl_timeout_handler23a() =>\n"); */
 
@@ -2263,14 +2258,12 @@ static int recv_func_posthandle(struct rtw_adapter *padapter,
 	/*
 	 * Pull off crypto headers
 	 */
-	if (prframe->attrib.iv_len > 0) {
+	if (prframe->attrib.iv_len > 0)
 		skb_pull(prframe->pkt, prframe->attrib.iv_len);
-	}
 
-	if (prframe->attrib.icv_len > 0) {
+	if (prframe->attrib.icv_len > 0)
 		skb_trim(prframe->pkt,
 			 prframe->pkt->len - prframe->attrib.icv_len);
-	}
 
 	prframe = portctrl(padapter, prframe);
 	if (!prframe) {
