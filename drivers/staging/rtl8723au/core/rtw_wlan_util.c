@@ -405,8 +405,8 @@ bool is_client_associated_to_ap23a(struct rtw_adapter *padapter)
 	if (pmlmeinfo->state & WIFI_FW_ASSOC_SUCCESS &&
 	    (pmlmeinfo->state & 0x03) == MSR_INFRA)
 		return true;
-	else
-		return false;
+
+	return false;
 }
 
 bool is_client_associated_to_ibss23a(struct rtw_adapter *padapter)
@@ -417,8 +417,8 @@ bool is_client_associated_to_ibss23a(struct rtw_adapter *padapter)
 	if (pmlmeinfo->state & WIFI_FW_ASSOC_SUCCESS &&
 	    (pmlmeinfo->state & 0x03) == MSR_ADHOC)
 		return true;
-	else
-		return false;
+
+	return false;
 }
 
 bool is_IBSS_empty23a(struct rtw_adapter *padapter)
@@ -441,8 +441,8 @@ unsigned int decide_wait_for_beacon_timeout23a(unsigned int bcn_interval)
 		return WAIT_FOR_BCN_TO_MIN;
 	else if ((bcn_interval << 2) > WAIT_FOR_BCN_TO_MAX)
 		return WAIT_FOR_BCN_TO_MAX;
-	else
-		return bcn_interval << 2;
+
+	return bcn_interval << 2;
 }
 
 void clear_cam_entry23a(struct rtw_adapter *padapter, u8 entry)
@@ -1076,8 +1076,8 @@ bool is_ap_in_tkip23a(struct rtw_adapter *padapter)
 			i += (p[1] + 2);
 		}
 		return false;
-	} else
-		return false;
+	}
+	return false;
 }
 
 bool should_forbid_n_rate23a(struct rtw_adapter *padapter)
@@ -1113,9 +1113,8 @@ bool should_forbid_n_rate23a(struct rtw_adapter *padapter)
 			i += (p[1] + 2);
 		}
 		return true;
-	} else {
-		return false;
 	}
+	return false;
 }
 
 bool is_ap_in_wep23a(struct rtw_adapter *padapter)
@@ -1146,8 +1145,8 @@ bool is_ap_in_wep23a(struct rtw_adapter *padapter)
 		}
 
 		return true;
-	} else
-		return false;
+	}
+	return false;
 }
 
 static int wifirate2_ratetbl_inx23a(unsigned char rate)
@@ -1247,8 +1246,8 @@ int support_short_GI23a(struct rtw_adapter *padapter,
 
 	if (pHT_caps->cap_info & cpu_to_le16(0x1 << bit_offset))
 		return _SUCCESS;
-	else
-		return _FAIL;
+
+	return _FAIL;
 }
 
 unsigned char get_highest_rate_idx23a(u32 mask)
@@ -1352,8 +1351,8 @@ unsigned char check_assoc_AP23a(u8 *pframe, uint len)
 				if (ralink_vendor_flag) {
 					DBG_8723A("link to Tenda W311R AP\n");
 					return HT_IOT_PEER_TENDA;
-				} else
-					DBG_8723A("Capture EPIGRAM_OUI\n");
+				}
+				DBG_8723A("Capture EPIGRAM_OUI\n");
 			} else
 				break;
 		default:
@@ -1369,10 +1368,9 @@ unsigned char check_assoc_AP23a(u8 *pframe, uint len)
 	} else if (ralink_vendor_flag && epigram_vendor_flag) {
 		DBG_8723A("link to Tenda W311R AP\n");
 		return HT_IOT_PEER_TENDA;
-	} else {
-		DBG_8723A("link to new AP\n");
-		return HT_IOT_PEER_UNKNOWN;
 	}
+	DBG_8723A("link to new AP\n");
+	return HT_IOT_PEER_UNKNOWN;
 }
 
 void update_IOT_info23a(struct rtw_adapter *padapter)
