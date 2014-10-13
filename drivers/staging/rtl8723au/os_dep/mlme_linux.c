@@ -42,7 +42,7 @@ void rtw_reset_securitypriv23a(struct rtw_adapter *adapter)
 		backupTKIPcountermeasure_time = adapter->securitypriv.btkip_countermeasure_time;
 
 		memset((unsigned char *)&adapter->securitypriv, 0,
-		       sizeof (struct security_priv));
+		       sizeof(struct security_priv));
 		/* Restore the PMK information to securitypriv structure
 		 * for the following connection.
 		 */
