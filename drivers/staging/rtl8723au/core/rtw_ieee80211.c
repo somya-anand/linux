@@ -378,7 +378,7 @@ int rtw_generate_ie23a(struct registry_priv *pregistrypriv)
 		wireless_mode = pregistrypriv->wireless_mode;
 	}
 
-	rtw_set_supported_rate23a(pdev_network->SupportedRates, wireless_mode) ;
+	rtw_set_supported_rate23a(pdev_network->SupportedRates, wireless_mode);
 
 	rateLen = rtw_get_rateset_len23a(pdev_network->SupportedRates);
 
