@@ -1173,7 +1173,7 @@ static int validate_recv_ctrl_frame(struct rtw_adapter *padapter,
 
 				psta->sleepq_len--;
 
-				if (psta->sleepq_len>0)
+				if (psta->sleepq_len > 0)
 					pxmitframe->attrib.mdata = 1;
 				else
 					pxmitframe->attrib.mdata = 0;
@@ -1863,7 +1863,7 @@ int check_indicate_seq(struct recv_reorder_ctrl *preorder_ctrl, u16 seq_num);
 int check_indicate_seq(struct recv_reorder_ctrl *preorder_ctrl, u16 seq_num)
 {
 	u8	wsize = preorder_ctrl->wsize_b;
-	u16	wend = (preorder_ctrl->indicate_seq + wsize -1) & 0xFFF;
+	u16	wend = (preorder_ctrl->indicate_seq + wsize - 1) & 0xFFF;
 
 	/*  Rx Reorder initialize condition. */
 	if (preorder_ctrl->indicate_seq == 0xFFFF)
@@ -1884,7 +1884,7 @@ int check_indicate_seq(struct recv_reorder_ctrl *preorder_ctrl, u16 seq_num)
 	} else if (SN_LESS(wend, seq_num)) {
 		/*  boundary situation, when seq_num cross 0xFFF */
 		if (seq_num >= (wsize - 1))
-			preorder_ctrl->indicate_seq = seq_num + 1 -wsize;
+			preorder_ctrl->indicate_seq = seq_num + 1 - wsize;
 		else
 			preorder_ctrl->indicate_seq = 0xFFF - (wsize - (seq_num + 1)) + 1;
 	}
@@ -2049,7 +2049,7 @@ int recv_indicatepkt_reorder(struct rtw_adapter *padapter,
 		/* s1. */
 		wlanhdr_to_ethhdr(prframe);
 
-		if ((pattrib->qos!= 1) || (pattrib->eth_type == ETH_P_ARP) ||
+		if ((pattrib->qos != 1) || (pattrib->eth_type == ETH_P_ARP) ||
 		    (pattrib->ack_policy != 0)) {
 			if ((padapter->bDriverStopped == false) &&
 			    (padapter->bSurpriseRemoved == false)) {
@@ -2376,7 +2376,7 @@ void rtw_signal_stat_timer_hdl23a(unsigned long data)
 		if (!check_fwstate(&adapter->mlmepriv, _FW_UNDER_SURVEY)) {
 			tmp_s = (avg_signal_strength + (_alpha - 1) *
 				 recvpriv->signal_strength);
-			if (tmp_s %_alpha)
+			if (tmp_s % _alpha)
 				tmp_s = tmp_s / _alpha + 1;
 			else
 				tmp_s = tmp_s / _alpha;
@@ -2385,7 +2385,7 @@ void rtw_signal_stat_timer_hdl23a(unsigned long data)
 
 			tmp_q = (avg_signal_qual + (_alpha - 1) *
 				 recvpriv->signal_qual);
-			if (tmp_q %_alpha)
+			if (tmp_q % _alpha)
 				tmp_q = tmp_q / _alpha + 1;
 			else
 				tmp_q = tmp_q / _alpha;
