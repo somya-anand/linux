@@ -549,7 +549,7 @@ static struct recv_frame *portctrl(struct rtw_adapter *adapter,
 	uint auth_alg;
 	struct recv_frame *pfhdr;
 	struct sta_info *psta;
-	struct sta_priv *pstapriv ;
+	struct sta_priv *pstapriv;
 	struct recv_frame *prtnframe;
 	u16 ether_type;
 	u16 eapol_type = ETH_P_PAE;/* for Funia BD's WPA issue */
