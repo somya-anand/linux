@@ -761,7 +761,7 @@ static void count_rx_stats(struct rtw_adapter *padapter,
 	int sz;
 	struct sta_info *psta = NULL;
 	struct stainfo_stats *pstats = NULL;
-	struct rx_pkt_attrib *pattrib = & prframe->attrib;
+	struct rx_pkt_attrib *pattrib = &prframe->attrib;
 	struct recv_priv *precvpriv = &padapter->recvpriv;
 
 	sz = prframe->pkt->len;
@@ -793,7 +793,7 @@ static int sta2sta_data_frame(struct rtw_adapter *adapter,
 	struct sk_buff *skb = precv_frame->pkt;
 	struct ieee80211_hdr *hdr = (struct ieee80211_hdr *) skb->data;
 	int ret = _SUCCESS;
-	struct rx_pkt_attrib *pattrib = & precv_frame->attrib;
+	struct rx_pkt_attrib *pattrib = &precv_frame->attrib;
 	struct sta_priv *pstapriv = &adapter->stapriv;
 	struct mlme_priv *pmlmepriv = &adapter->mlmepriv;
 	u8 *mybssid  = get_bssid(pmlmepriv);
@@ -894,7 +894,7 @@ int ap2sta_data_frame(struct rtw_adapter *adapter,
 {
 	struct sk_buff *skb = precv_frame->pkt;
 	struct ieee80211_hdr *hdr = (struct ieee80211_hdr *) skb->data;
-	struct rx_pkt_attrib *pattrib = & precv_frame->attrib;
+	struct rx_pkt_attrib *pattrib = &precv_frame->attrib;
 	int ret = _SUCCESS;
 	struct sta_priv *pstapriv = &adapter->stapriv;
 	struct mlme_priv *pmlmepriv = &adapter->mlmepriv;
@@ -1024,7 +1024,7 @@ int sta2ap_data_frame(struct rtw_adapter *adapter,
 {
 	struct sk_buff *skb = precv_frame->pkt;
 	struct ieee80211_hdr *hdr = (struct ieee80211_hdr *) skb->data;
-	struct rx_pkt_attrib *pattrib = & precv_frame->attrib;
+	struct rx_pkt_attrib *pattrib = &precv_frame->attrib;
 	struct sta_priv *pstapriv = &adapter->stapriv;
 	struct mlme_priv *pmlmepriv = &adapter->mlmepriv;
 	unsigned char *mybssid = get_bssid(pmlmepriv);
@@ -1290,7 +1290,7 @@ static int validate_recv_data_frame(struct rtw_adapter *adapter,
 	u8 bretry;
 	u8 *psa, *pda;
 	struct sta_info *psta = NULL;
-	struct rx_pkt_attrib *pattrib = & precv_frame->attrib;
+	struct rx_pkt_attrib *pattrib = &precv_frame->attrib;
 	struct security_priv *psecuritypriv = &adapter->securitypriv;
 	int ret = _SUCCESS;
 	struct sk_buff *skb = precv_frame->pkt;
@@ -1475,7 +1475,7 @@ static int validate_recv_frame(struct rtw_adapter *adapter,
 	u8 type;
 	u8 subtype;
 	int retval = _SUCCESS;
-	struct rx_pkt_attrib *pattrib = & precv_frame->attrib;
+	struct rx_pkt_attrib *pattrib = &precv_frame->attrib;
 	struct sk_buff *skb = precv_frame->pkt;
 	struct ieee80211_hdr *hdr = (struct ieee80211_hdr *) skb->data;
 	u8 ver;
